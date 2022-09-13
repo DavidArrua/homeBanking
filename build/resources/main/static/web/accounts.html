@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <!--style-->
+    <link rel="stylesheet" href="./assets/style/style.css">
+</head>
+<body>
+  <div id="app">
+    <div class="body-bg-all">
+      <header>
+        <nav class="navbar navbar-expand-lg">
+          <div class="container">
+            <a class="navbar-brand" href="#">
+              <img class="icon-bank" src="../web/assets/img/bank-icon-flat-529901-removebg-preview.png" alt="">
+            </a>
+            <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end container " id="navbarNav">
+              <ul class="navbar-nav fw-bold me-5">
+                
+                <li class="nav-item">
+                  <a class="nav-link text-nav hover-nav" href="#">ACCOUNTS</a>
+                </li>
+                
+                <li class="nav-item">
+                  <a class="nav-link text-nav hover-nav" href="./cards.html">CARDS</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-nav hover-nav" href="./transfers.html">TRANSFERS</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-nav hover-nav" href="./loan-application.html">LOAN APPLICATION</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-nav hover-nav" href="./posnet.html">POSTNET</a>
+                </li>
+              </ul>
+            </div>
+            <button @click="logOut" class="button-logOut">
+              <img class="icon-logout" src="./assets/img/logout.png" alt="">
+            </button>
+          </div>
+        </nav>
+      </header>
+      <div class="banner-account d-flex align-items-center ">
+        <div class="container mb-3">
+          <h2>Welcome back, {{clients.firstName}}!</h2>
+          <p></p>
+        </div>
+      </div>
+        <div class="container">
+          <main class="d-flex justify-content-between container table-media ">
+            <div class="table-accounts me-5 col-12 col-xl-8">
+              <div class="d-flex justify-content-between align-items-center">
+                <h4 class="mt-4 ">My accounts</h4>
+                <div class="d-flex justify-content-center align-items-center gap-2">
+                  <div v-if="accounts.length >= 3">
+                  </div>
+                  <div v-else>
+                    <button type="button" class="btn btn-violet h-50 mt-3" data-bs-toggle="modal" data-bs-target="#exampleModal">Create a new account</button>
+                  </div>
+                  <div class="mt-2">
+                    <div class="engranaje-bg engranaje mt-2" data-bs-toggle="dropdown" aria-expanded="false"></div>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item fw-bold" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal1">Delete account</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+
+            <!-- Modal delte account-->
+            <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Which account do you want to delete?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <label v-for="account in accounts"  :for="account.id"class="d-flex justify-content-around align-items-center text-start border mt-2">
+                      <div>
+                        <h5 class="fw-bold">{{account.number}}</h5>
+                        <p class="fw-bold">{{account.type}}</p>
+                        <p class="fw-light date-m">{{newDate(account.creationDate)}}</p>
+                      </div>
+                      <p>{{formattedNumber(account.balance)}}</p>
+                      <input type="radio" name="deleteAccount" :value="account.number" :id="account.id" v-model="accountDelete">
+                    </label>
+                  </div>
+                  <div class="modal-footer">
+                    <butto type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</butto>
+                    <button type="button" class="btn btn-primary" @click="deleteAccount" data-bs-dismiss="modal">Delete account</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Modal create account -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">what type of account do you want?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="d-flex justify-content-center gap-3">
+                      <button type="button" class="cont-btn fw-bold" @click="changeTypeAccountSaving" :class="{'bg-1' : togleS == false, 'bg-2' : togleS == true}" @click="togleSaving">Savings account</button>
+                      <button type="button" class="cont-btn fw-bold" @click="changeTypeAccountCurrent" :class="{'bg-1' : togleC == false, 'bg-2' : togleC == true}" @click="togleCurrent">Current account</button>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-primary"@click="CreateAccount" data-bs-dismiss="modal">Save changes</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+              <div class="w-100 ">
+                  <div v-for="account in accounts" class="d-flex justify-content-around align-items-center tbody-accounts mb-2 mt-2 bg-light border-info">
+                    <div class=" v-100  d-flex align-items-center justify-content-center">
+                      <div class="d-flex flex-column">
+                        <div class="mt-2 fs-5">
+                          {{clients.firstName}} {{clients.lastName}}
+                        </div>
+                        <div>
+                          <div v-if="account.type == 'CURRENT'">
+                            <p class="fs-7">Current account</p>
+                          </div>
+                          <div v-else class="fs-7">
+                            <p>Savings account</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="d-flex flex-column justify-content-center align-content-center h-100 v-100 ">
+                      <div class="d-flex align-items-center justify-content-center">
+                        <p class="mt-5 text-account fs-5 fw-semibold">{{formattedNumber(account.balance)}}</p>
+                      </div>
+                      <div class="h-100 v-100 d-flex align-items-center justify-content-center">
+                        <p class="mb-5 fs-7 text-center">{{account.number}}</p>
+                      </div>
+                    </div>
+                    <div class="v-100 d-flex align-items-center justify-content-center">
+                      <a :href="'./account.html?id='+account.id" class="btn btn-violet">transactions</a>
+                    </div>
+                  </div>
+              </div>
+              <div class="d-flex justify-content-between align-items-center">
+                <h4 class="mt-4 mb-3">My loans</h4>
+                <a href="./loan-application.html" class="btn btn-violet h-50 mt-3">Apply for a loan</a>
+              </div>
+              <div >
+                <div v-if="loans.length == 0" >
+                  <p class="fs-6 fw-bold text-center text-black-50" >You still have no loans</p>
+                </div>
+                <div v-else v-for="loan in loans" class="d-flex justify-content-around align-items-center tbody-accounts mb-2 mt-2 bg-light border-info">
+                  <div class="h-100 v-100 d-flex align-items-center justify-content-center ">
+                    <p>{{loan.name}}</p>
+                  </div>
+                  <div class="h-100 v-100 d-flex align-items-center justify-content-center fw-bolder mt-2 ">
+                    <p>{{formattedNumber(loan.amount)}}</p>
+                  </div>
+                  <div class="h-100 v-100 d-flex align-items-center justify-content-center mt-2 ">
+                    <p class="fw-bold">{{loan.payments}}<span class="fw-semibold fw-light"> Payments of </span>{{formattedNumber(loan.amount / loan.payments)}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="profile-accounts d-flex align-items-center flex-column bg-light col-12 col-xl-4 mt-4 bg-v">
+              <img src="./assets/img/profile.png" alt="" class="mt-5">
+              <p class="fs-5 fw-bold mt-2">{{clients.firstName}} {{clients.lastName}}</p>
+              <p class="fs-6">{{clients.email}}</p>
+            </div>
+        </main>
+        </div>
+    </div>
+  </div>
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+<!-- vue -->
+<script src="https://unpkg.com/vue@3"></script>
+<!-- axios -->
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<!--sweetalert-->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!--main-->
+<script src="./js/accounts.js"></script>
+</body>
+</html>

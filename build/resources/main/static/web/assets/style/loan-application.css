@@ -1,0 +1,102 @@
+
+.body-bg-all{
+    background-image: url(../img/banner-bg.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 20vw -5vh;
+    background-attachment: fixed;
+}
+
+.btn-violet{
+  background-color: RGB(86, 71, 135);
+  border: solid rgba(100, 81, 163, 0.375);
+  color: white;
+}
+
+.btn-violet:hover{
+  background-color: rgba(100, 81, 163, 0.987);
+  border:solid rgba(105, 81, 184, 0.987);
+  color: white;
+}
+
+.btn-violet-gost{
+  background-color: rgb(128, 107, 195);
+  color: white;
+  border: solid 2px rgba(100, 81, 163, 0.622);
+}
+
+.btn-violet-gost:hover{
+  background-color: rgb(128, 107, 195);
+  border: solid 2px rgba(100, 81, 163, 0.622);
+  color: white;
+}
+
+.body-manager{
+  background-image: url(../img/slider-bg.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+
+.icon-bank{
+    width: 7rem;
+  }
+
+  .icon-logout{
+    width: 1.5rem;
+  }
+
+
+  .button-logOut{
+    background-color: #69165d00;
+    border-radius: 50%;
+    border: none;
+  }
+  
+  
+  .button-logOut:hover{
+    background-color: #ffffff9c;
+  }
+
+
+.form-manager{
+    width: 500px;
+    height: 450px;
+}
+
+.cont-form{
+    border-radius: 1vw;
+    background: rgba( 255, 255, 255, 0.5 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 6px );
+    -webkit-backdrop-filter: blur( 6px );
+    border-radius: 10px;
+}
+
+
+input,
+option,
+select {
+	background-color: rgb(241, 252, 255);
+  height: 7.2vh;
+	border: none;
+	padding: 12px 15px;
+	margin: 8px 0;
+  border-radius: .6rem;
+}
+
+.s{
+  width: 100%;
+}
+
+.m-mar{
+    margin-bottom: -0.1rem;
+}
+
+
+@media (max-width : 990px){
+  .text-nav{
+      color: rgb(30, 28, 28);
+  }
+}

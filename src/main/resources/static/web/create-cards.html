@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- CSS only -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+  <!--style-->
+  <link rel="stylesheet" href="./assets/style/create-cards.css">
+</head>
+
+<body>
+  <div id="app" class="body-bg-all vh-100">
+    <header>
+      <nav class="navbar navbar-expand-lg">
+        <div class="container">
+          <a class="navbar-brand" href="#">
+            <img class="icon-bank" src="../web/assets/img/bank-icon-flat-529901-removebg-preview.png" alt="">
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse justify-content-end container" id="navbarNav">
+            <ul class="navbar-nav fw-bold me-5">
+              <li class="nav-item">
+                <a class="nav-link text-white hover-nav" href="./accounts.html">ACCOUNTS</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-white hover-nav" href="./cards.html">CARDS</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-white hover-nav" href="./transfers.html">TRANSFERS</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-nav hover-nav" href="./loan-application.html">LOAN APPLICATION</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-nav hover-nav" href="./posnet.html">POSTNET</a>
+              </li>
+            </ul>
+          </div>
+          <button @click="logOut" class="button-logOut">
+            <img class="icon-logout" src="./assets/img/logout.png" alt="">
+          </button>
+        </div>
+      </nav>
+    </header>
+    <main class="vw-100 h-75 container d-flex justify-content-around align-items-center flex-wrap">
+      <div>
+        <h4 class="text-center">Preview of your card</h4>
+        <div class="card">
+          <div class="card__front card__part" :class="{'card__part_generic' : selectedColor == null, 'card__part_silver' : selectedColor == 'SILVER', 'card__part_titanium' : selectedColor == 'TITANIUM', 'card__part_gold' : selectedColor == 'GOLD'}" >
+            <img class="card__front-square card__square" src="./assets/img/bank-icon-flat-529901-removebg-preview.png">
+            <div class="card__front-logo card__logo"> 
+              <p class="card__info mt-3">{{selectedType == 'DEBIT' ? "DEBIT" : "CREDIT"}}</p>
+            </div>
+            <p class="card_numer pt-3">1234 1234 1234 1234</p>
+            <div class="card__space-75">
+              <span class="card__label">Card holder</span>
+              <p class="card__info">**** ****</p>
+            </div>
+            <div class="card__space-25">
+              <span class="card__label">Expires</span>
+              <p class="card__info">** **</p>
+            </div>
+          </div>
+        </div>
+      </div>
+        <div>
+          <div>
+            <h6>MindHub Brothers Bank issues  card that is directly connected to your checking account. </h6>
+            <div v-if="selectedColor == null" class="min-box mb-3 mt-4">
+              
+            </div>
+            <div v-if="selectedColor == 'TITANIUM'" class="min-box mt-4">
+              <ul>
+                <li>Fuel expenditure - <strong>5%cashback..</strong> </li>
+                <li>Telephone bills  -<strong> 5% cashback.</strong>. </li>
+                <li>Utility bills - <strong>5% cashback.. </strong></li>
+                <li>Cash Back Redemption Rate - <strong>1 point for every INR 150..</strong> </li>
+              </ul>
+            </div>
+            <div v-if="selectedColor == 'GOLD'" class="min-box mt-4">
+              <ul>
+                <li>Fuel expenditure -<strong> 2% cashback..</strong></li>
+                <li>Telephone bills  -<strong> 2% cashback.. </strong></li>
+                <li>Utility bills - <strong>2% cashback.. </strong></li>
+                <li>Cash Back Redemption Rate -<strong> 1 point for every INR 150.. </strong></li>
+              </ul>
+            </div>
+            <div v-if="selectedColor == 'SILVER'" class="min-box mt-4">
+              <ul>
+                <li>Fuel expenditure -<strong> 0,5% cashback..</strong></li>
+                <li>Telephone bills  - <strong>0,5% cashback.. </strong></li>
+                <li>Utility bills - <strong>0,5% cashback.. </strong></li>
+                <li>Cash Back Redemption Rate -<strong> 0,5 point for every INR 150..</strong></li>
+              </ul>
+            </div>
+          </div>
+          <div class="d-flex justify-content-center align-items-center gap-5 flex-wrap">
+            <div >
+              <div>Select the color</div>
+              <select v-model="selectedColor">
+                <option disabled value="">Please select one</option>
+                <option>SILVER</option>
+                <option>TITANIUM</option>
+                <option>GOLD</option>
+              </select>
+            </div>
+            <div>
+              <div>Select the type</div>
+              <select v-model="selectedType">
+                <option disabled value="">Please select one</option>
+                <option>DEBIT</option>
+                <option>CREDIT</option>
+              </select>
+            </div>
+            <div>
+              <div>Asociated account</div>
+              <select v-model="selectedAccount">
+                <option disabled value="">Please select one</option>
+                <option v-for="account in accounts">{{account.number}}</option>
+              </select>
+            </div>
+            </div>
+            <div class="d-flex justify-content-center mt-3">
+              <button type="submit" class="btn btn-primary fw-bolder h-50 w-75" @click="createCards">Create a
+                card</button>
+            </div>
+          </div> 
+        </div>   
+    </main>
+  </div>
+  <!-- JavaScript Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+    crossorigin="anonymous"></script>
+  <!-- vue -->
+  <script src="https://unpkg.com/vue@3"></script>
+  <!-- axios -->
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <!--sweetalert-->
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <!--main-->
+  <script src="./js/create-cards.js"></script>
+</body>
+
+</html>

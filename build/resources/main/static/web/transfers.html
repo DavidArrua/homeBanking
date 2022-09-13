@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- CSS only -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+  <!--style-->
+  <link rel="stylesheet" href="./assets/style/style.css">
+  <link rel="stylesheet" href="./assets/style/transfer.css">
+</head>
+
+<body>
+  <div id="app" class="body-manager vh-100">
+
+    <header>
+      <nav class="navbar navbar-expand-lg">
+        <div class="container">
+          <a class="navbar-brand" href="#">
+            <img class="icon-bank" src="../web/assets/img/bank-icon-flat-529901-removebg-preview.png" alt="">
+          </a>
+          <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse justify-content-end container " id="navbarNav">
+            <ul class="navbar-nav fw-bold me-5">
+              <li class="nav-item">
+                <a class="nav-link text-nav hover-nav" href="./accounts.html">ACCOUNTS</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-nav hover-nav" href="./cards.html">CARDS</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-nav hover-nav" href="#">TRANSFERS</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-nav hover-nav" href="./loan-application.html">LOAN APPLICATION</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-nav hover-nav" href="./posnet.html">POSTNET</a>
+              </li>
+            </ul>
+          </div>
+          <button @click="logOut" class="button-logOut">
+            <img class="icon-logout" src="./assets/img/logout.png" alt="">
+          </button>
+        </div>
+      </nav>
+    </header>
+      <main class="container d-flex justify-content-center flex-wrap mt-5">
+        <div class="d-flex flex-wrap justify-content-center align-items-center col-sm-12 col-lg-6 mt-5 bg-transfer">
+            <h3 class="fw-bold fs-2">The best transfers</h3>
+            <ul class="fs-5">
+              <li>Transfer faster than ever</li>
+              <li>With maximum security</li>
+              <li>Without any commission</li>
+              <li>And easier than ever</li>
+            </ul>
+        </div>
+        <div class="d-flex flex-column align-content-center gap-3 col-lg-12 col-xl-6">
+          <div class="d-flex gap-2 ms-4"> 
+            <button class="cont-btn fw-bold" @click=" changeTransferOwner" :class="{'bg-1' : togleO == false, 'bg-2' : togleO == true}">Own account</button>
+            <button class="cont-btn fw-bold" @click=" changeTransferThird" :class="{'bg-1' : togleT == false, 'bg-2' : togleT == true}">Transfer to third parties</button>
+          </div>
+          <div class="main-loan ms-3  cont-form form-manager d-flex flex-column justify-content-center">
+            <h6 class="fw-bold m-mar ms-3 mt-2" >Choose the account</h6>
+            <select v-model="selectedAccountOrigin"  class="ms-3 me-3">
+              <option disabled value="">Please select one</option>
+              <option v-for="account in accounts">{{account.number}}</option>
+            </select>
+
+            <div v-if="transferDestination == 'own'" class="ms-3 me-3">
+              <h6 class="fw-bold m-mar mt-2">Destination account</h6>
+              <select v-model="selectedAccountDestiny" class="s">
+                <option disabled value="">Please select one</option>
+                <option v-for="account in accounts" v-show="account.number != selectedAccountOrigin">{{account.number}}</option>
+              </select>
+            </div>
+
+            <div v-if="transferDestination == 'third'" class="ms-3 me-3 d-flex flex-column">
+              <label for="destinyAccount2" class="fw-bold m-mar mt-1">Destination account</label>
+              <input type="text" id="destinyAccount2" v-model="selectedAccountDestiny">
+            </div>
+
+            <div class="d-flex flex-column">
+              <label for="description2" class="ms-3 fw-bold m-mar">Description</label>
+              <input type="text" id="description2" class="ms-3 me-3" v-model="description">
+            </div>
+
+            <div class="d-flex flex-column">
+              <label for="amount2" class="ms-3 fw-bold m-mar">Amount</label>
+              <input type="number" id="amount2" v-model="amount" class="ms-3 me-3">
+            </div>
+
+            <div class="ms-3 me-3 mt-3">
+              <div v-if="selectedAccountOrigin == false || selectedAccountDestiny == false || description == '' || amount <= 0">
+                <button type="button" @click="emptyData" class="btn btn-primary-gost mt-2 me-3 w-100">
+                  Transfer</button>
+              </div>
+              <div v-else>
+                <button type="button" class="btn btn-primary mt-2 me-3 w-100" @click="sendTransfer">
+                    Transfer</button>
+              </div>
+            </div> 
+          </div>
+        </div>
+      </main>
+
+  </div>
+
+
+  <!-- JavaScript Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+    crossorigin="anonymous"></script>
+  <!-- vue -->
+  <script src="https://unpkg.com/vue@3"></script>
+  <!-- axios -->
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <!--sweetalert-->
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <!--main-->
+  <script src="./js/transfers.js"></script>
+</body>
+
+</html>

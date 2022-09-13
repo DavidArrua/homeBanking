@@ -1,0 +1,204 @@
+@import url('https://fonts.googleapis.com/css?family=Space+Mono:400,400i,700,700i');
+
+.body-bg-all{
+    background-image: url(../img/banner-bg.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 20vw -5vh;
+    background-attachment: fixed;
+}
+
+.btn-primary{
+  background-color: RGB(86, 71, 135);
+  border: solid rgba(100, 81, 163, 0.375);
+}
+
+.btn-primary:hover{
+  background-color: rgba(100, 81, 163, 0.987);
+  border:solid rgba(105, 81, 184, 0.987);
+}
+
+.btn-primary-gost{
+  background-color: rgb(128, 107, 195);
+  color: white;
+  border: solid 2px rgba(100, 81, 163, 0.622);
+}
+
+.btn-primary-gost:hover{
+  background-color: rgb(128, 107, 195);
+  border: solid 2px rgba(100, 81, 163, 0.622);
+  color: white;
+}
+
+.title {
+    margin-bottom: 30px;
+    color: #69165d;
+}
+
+.card{
+width: 320px;
+height: 190px;
+  -webkit-perspective: 600px;
+  -moz-perspective: 600px;
+  perspective:600px;
+  background-color: #aaa3a300 !important;
+  border: none;
+  margin: 1rem;
+}
+
+.card__part{
+  box-shadow: 1px 1px #aaa3a3;
+  top: 0;
+  position: absolute;
+  z-index: 1000;
+  left: 0;
+  display: inline-block;
+  width: 320px;
+  height: 190px;
+
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border-radius: 8px;
+    -webkit-transition: all 3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    -moz-transition: all 3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    -ms-transition: all 3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    -o-transition: all 3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: all 3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+}
+
+.card__part_generic{
+  background-image: url('../img/xworld-map.png.pagespeed.ic.tM6IqIff0Z.png'), linear-gradient(to right bottom, #464248, #221821, #271124, #221821, #464248);
+}
+
+.card__part_gold{
+  background-image: url('../img/xworld-map.png.pagespeed.ic.tM6IqIff0Z.png'), linear-gradient(to right bottom, #b8bd9b, #9da47d, #d8dfb1, #9da47d, #b8bd9b); 
+}
+
+.card__part_silver{
+  background-image: url('../img/xworld-map.png.pagespeed.ic.tM6IqIff0Z.png'), linear-gradient(to right bottom, #f5feff, #c8d3d4, #8f8490, #bac7c8, #a7b2b3); 
+}
+
+.card__part_titanium{
+  background-image: url('../img/xworld-map.png.pagespeed.ic.tM6IqIff0Z.png'), linear-gradient(to right bottom, #bcdfde, #92b7b6, #6c9e9b, #92b7b6, #bcdfde); 
+}
+
+.card__front{
+  padding: 18px;
+-webkit-transform: rotateY(0);
+-moz-transform: rotateY(0);
+}
+
+.card__back {
+  padding: 18px 0;
+-webkit-transform: rotateY(-180deg);
+-moz-transform: rotateY(-180deg);
+}
+
+.card__black-line {
+    margin-top: 5px;
+    height: 38px;
+    background-color: #303030;
+}
+
+.card__logo {
+    height: 16px;
+}
+
+.card__front-logo{
+    position: absolute;
+    top: 18px;
+    right: 18px;
+}
+
+.card__square {
+  height: 2.5rem;
+  margin-bottom: -1.5rem;
+  margin-left: -2rem;
+}
+
+.card_numer {
+    display: block;
+    width: 100%;
+    word-spacing: 4px;
+    font-size: 20px;
+    letter-spacing: 2px;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.card__space-75 {
+    width: 75%;
+    float: left;
+}
+
+.card__space-25 {
+    width: 25%;
+    float: left;
+}
+
+.card__label {
+    font-size: 10px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.8);
+    letter-spacing: 1px;
+}
+
+.card__info {
+    margin-bottom: 0;
+    margin-top: 5px;
+    font-size: 16px;
+    line-height: 18px;
+    color: #fff;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+
+.icon-logout{
+  width: 1.5rem;
+}
+
+.button-logOut{
+  background-color: #69165d00;
+  border-radius: 50%;
+  border: none;
+}
+
+
+.button-logOut:hover{
+  background-color: #ffffff9c;
+}
+
+
+.min-h{
+  min-height: 35vh;
+}
+
+.icon-bank{
+  width: 7rem;
+}
+
+select{
+  border: none;
+  background-color: #eaeaea;
+}
+
+
+.min-box{
+  height: 20vh;
+}
+
+
+
+@media (max-width : 990px){
+  .text-nav{
+      color: rgb(30, 28, 28);
+  }
+}
