@@ -18,6 +18,10 @@ body {
 	width: 100vw;
 }
 
+.title-mindhub{
+	color: #3c4d51;
+}
+
 h1 {
 	font-weight: bold;
 	margin: 0;
